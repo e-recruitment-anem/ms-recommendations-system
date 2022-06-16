@@ -1,4 +1,4 @@
-import { count_similarities } from '../helpers/utils';
+import { calculateAddedWeight, count_similarities } from '../helpers/utils';
 
 // Calculate the similarities between offers and profile
 const offerWorker = (offers, profiles) => {
@@ -25,17 +25,19 @@ const offerWorker = (offers, profiles) => {
 // Calculate the similarities between profile and offers
 const profileWorker = (profiles, offers) => {
   const matchTable = [];
-  for (let index = 0; index < profiles.length; index++) {
-    const profile = profiles[index];
+  for (let j = 0; j < profiles.length; j++) {
+    const profile = profiles[j];
 
     for (let index = 0; index < offers.length; index++) {
       const offer = offers[index];
 
       const match = count_similarities(profile.skills, offer.skills);
+      const weight = calculateAddedWeight(profile.skills, match);
 
       matchTable.push({
         profile: profile.name,
         offer: offer.title,
+        weight,
         match: (match / profile.skills.length) * 100,
       });
     }
@@ -46,7 +48,8 @@ const profileWorker = (profiles, offers) => {
 
 // Process Data
 export const preWorker = async (learner, users, items, type) => {
-  let matchTable = type === 'offer' ? offerWorker(users, items) : profileWorker(users, items);
+  let matchTable =
+    type === 'offer' ? offerWorker(users, items) : profileWorker(users, items);
 
   for await (const item of matchTable) {
     if (item.match < 40) {
@@ -81,7 +84,9 @@ export const processProfile = async (learner, profile, offers) => {
   const matchTable = profileWorker([profile], offers);
 
   for await (const item of matchTable) {
-    if (item.match < 40) {
+    if (item.match > 60) {
+      await learner.addRating(item.profile, item.offer, item.weight);
+    } else if (item.match < 20) {
       await learner.viewed(item.profile, item.offer);
     }
   }

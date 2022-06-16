@@ -8,11 +8,10 @@ export const count_similarities = (arrayA, arrayB) => {
   return matches;
 };
 
-export const calculateAddedWeight = (user, item) => {
+export const calculateAddedWeight = (userItems, match) => {
   let weight = 0;
-  const match = count_similarities(user.skills, item.skills);
 
-  weight += Math.round((match / user.skills.length) * 5);
+  weight += Math.round((match / userItems.length) * 5);
 
   return weight;
 };

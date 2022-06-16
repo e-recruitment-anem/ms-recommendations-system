@@ -8,9 +8,10 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 import { json, urlencoded } from 'body-parser';
-// import { offerTrainer } from './trainer/offerLearner';
+
+// Model Trainers
 import { profileTrainer, profileLearner } from './trainer/profileLearner';
-import { offerTrainer } from './trainer/offerLearner';
+import { offerTrainer, offerLearner } from './trainer/offerLearner';
 
 export default function initializeServer(router: Router) {
   const app = express();
@@ -19,7 +20,7 @@ export default function initializeServer(router: Router) {
   profileTrainer()
 
   const plearner = profileLearner;
-  const olearner = profileLearner;
+  const olearner = offerLearner;
 
   plearner.save('profile');
   olearner.save('offer');
