@@ -4,11 +4,11 @@ export const offers = [
     skills: ['react', 'html', 'javascript', 'web development'],
   },
   {
-    title: 'ML OPS CDI',
+    title: 'Data Scientist',
     skills: ['python', 'machine learning', 'math', 'deep learning'],
   },
   {
-    title: 'NLP searcher',
+    title: 'Deep Learning engineer',
     skills: ['python', 'jupiter', 'math', 'deep learning'],
   },
   {
@@ -48,8 +48,8 @@ export const offers = [
     skills: ['react', 'angular', 'html', 'javascript', 'web development'],
   },
   {
-    title: 'Agent de securite',
-    skills: ['arab', 'bac'],
+    title: 'Agent de sécurité',
+    skills: ['communication', 'creative thinker'],
   },
   {
     title: 'ML engineer',
@@ -79,7 +79,7 @@ export const profiles = [
   },
   {
     name: 'yacine',
-    skills: ['jupiter', 'math', 'deep learning'],
+    skills: ['jupiter', 'math', 'deep learning', 'machine learning'],
   },
   {
     name: 'reda',
@@ -111,11 +111,11 @@ export const profiles = [
 
   {
     name: 'yasser',
-    skills: ['arab', 'bac'],
+    skills: ['communication', 'creative thinker'],
   },
   {
-    name: 'malki',
-    skills: ['arab', 'bac'],
+    name: 'Abdessamed',
+    skills: ['communication', 'creative thinker'],
   },
 
   {
